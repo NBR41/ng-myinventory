@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { environment } from '../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -8,11 +9,13 @@ import { User } from './user';
 @Injectable()
 export class BookService {
 
-    private Url = '/users';  // URL to web api
+    private Url: string;  // URL to web api
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) {
+        this.Url = `${environment.apihost}/users`;
+    }
 
     private handleError(error: any): Promise<any> {
       console.error('An error occurred', error); // for demo purposes only
