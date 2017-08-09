@@ -30,7 +30,7 @@ export class OwnershipService {
              .catch(this.handleError);
     }
 
-    getOwnership(user_id: number, book_id: number): Promise<Ownership> { 
+    getOwnership(user_id: number, book_id: number): Promise<Ownership> {
       return this.http.get(`${sprintf(this.Urlfmt, user_id)}/${book_id}`)
         .toPromise()
         .then(response => response.json().data as Ownership)

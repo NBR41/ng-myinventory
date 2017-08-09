@@ -20,8 +20,10 @@ export class AuthenticationService {
 
         // set token if saved in local storage
         var authinfo = JSON.parse(localStorage.getItem('authinfo'));
-        this.token = authinfo && authinfo.token;
-        this.user = authinfo.user
+        if (authinfo) {
+            this.token = authinfo.token;
+            this.user = authinfo.user
+        }
     }
 
     login(login: string, password: string): Observable<boolean> {

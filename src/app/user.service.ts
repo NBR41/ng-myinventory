@@ -7,7 +7,7 @@ import 'rxjs/add/operator/toPromise';
 import { User } from './user';
 
 @Injectable()
-export class BookService {
+export class UserService {
 
     private Url: string;  // URL to web api
 

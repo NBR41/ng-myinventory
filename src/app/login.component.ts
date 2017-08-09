@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 
 @Component({
     moduleId: module.id,
+    selector: 'login-user',
     templateUrl: 'login.component.html'
 })
 
@@ -28,10 +29,10 @@ export class LoginComponent implements OnInit {
             .subscribe(result => {
                 if (result === true) {
                     // login successful
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/dashboard']);
                 } else {
                     // login failed
-                    this.error = 'Username or password is incorrect';
+                    this.error = 'Login or password is incorrect';
                     this.loading = false;
                 }
             });
