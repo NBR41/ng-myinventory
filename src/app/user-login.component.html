@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <h2 class="panel-title">Please sign in</h2>
         </div>
-        <div class="panel-body"> 
+        <div class="panel-body">
             <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
                 <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
                     <label for="login">Email or Nickname</label>
@@ -22,8 +22,8 @@
                 <div *ngIf="error" class="alert alert-danger">{{error}}</div>
             </form>
             <hr />
-            <button class="btn btn-lg btn-info" type="button">Create your Account</button>
-            <button class="btn btn-lg btn-default" type="button">Forgotten password</button>
+            <button class="btn btn-lg btn-info" (click)="gotoCreate()" type="button">Create your Account</button>
+            <button class="btn btn-lg btn-default" (click)="gotoForgottenPassword()" type="button">Forgotten password</button>
         </div>
     </div>
 </div>

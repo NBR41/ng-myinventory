@@ -5,13 +5,16 @@ import { AuthGuard } from './auth.guard';
 import { ActivationGuard } from './activation.guard';
 import { AdminGuard } from './admin.guard';
 
-import { HomeComponent } from './home.component'
+import { HomeComponent } from './home.component';
+import { UserCreateComponent } from './user-create.component';
+import { ForgottenPasswordComponent } from './forgotten-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  /*
   { path: 'signup', component: UserCreateComponent },
+  { path: 'forgottenpassword', component: ForgottenPasswordComponent },
+  /*
   { path: 'validate', component: UserValidateComponent },
   { path: 'login', component: LoginComponent },/
   { path: 'resetpassword', component: ResetPasswordComponent },

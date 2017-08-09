@@ -5,11 +5,11 @@ import { AuthenticationService } from './authentication.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'login-user',
-    templateUrl: 'login.component.html'
+    selector: 'user-login',
+    templateUrl: 'user-login.component.html'
 })
 
-export class LoginComponent implements OnInit {
+export class UserLoginComponent implements OnInit {
     model: any = {};
     loading = false;
     error = '';
@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private authenticationService: AuthenticationService) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         // reset login status
         this.authenticationService.logout();
     }
 
-    login() {
+    login(): void {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(result => {
@@ -36,5 +36,13 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 }
             });
+    }
+
+    gotoCreate(): void {
+        this.router.navigate(['/signup'])
+    }
+
+    gotoForgottenPassword(): void {
+        this.router.navigate(['/forgottenpassword'])
     }
 }
