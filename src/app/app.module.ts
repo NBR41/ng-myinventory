@@ -12,6 +12,7 @@ import { UserLoginComponent} from './user-login.component';
 import { LoggedUserComponent } from './logged-user.component';
 import { UserCreateComponent } from './user-create.component';
 import { ForgottenPasswordComponent } from './forgotten-password.component';
+import { ResetPasswordComponent } from './reset-password.component';
 
 import { BookService } from './book.service';
 import { UserService } from './user.service';
@@ -29,7 +30,7 @@ import { AuthenticationService } from './authentication.service';
     ],
   declarations: [
     AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
-    UserCreateComponent, ForgottenPasswordComponent,
+    UserCreateComponent, ForgottenPasswordComponent, ResetPasswordComponent
   ],
 
   providers: [
