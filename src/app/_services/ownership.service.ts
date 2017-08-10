@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { sprintf } from 'sprintf-js'
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 import 'rxjs/add/operator/toPromise';
 
-import { Ownership } from './ownership';
+import { Ownership } from '../_models/ownership';
 
 @Injectable()
 export class OwnershipService {

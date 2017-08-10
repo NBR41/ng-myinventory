@@ -1,44 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
+import { MdDialogModule } from '@angular/material';
 
 import { GravatarModule } from 'ng2-gravatar-directive';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { HomeComponent} from './home.component';
-import { UserLoginComponent} from './user-login.component';
+import { HomeComponent} from './home/home.component';
+import { UserLoginComponent} from './user-login/user-login.component';
 import { LoggedUserComponent } from './logged-user.component';
-import { UserCreateComponent } from './user-create.component';
-import { ForgottenPasswordComponent } from './forgotten-password.component';
-import { ResetPasswordComponent } from './reset-password.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { ForgottenPasswordComponent, ForgottenPasswordDialog } from './forgotten-password/forgotten-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
-import { BookService } from './book.service';
-import { UserService } from './user.service';
-import { OwnershipService } from './ownership.service';
-import { AuthenticationService } from './authentication.service';
-
+import { BookService,UserService,OwnershipService,AuthenticationService, PasswordService } from './_services/index';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         AppRoutingModule,
-        GravatarModule
+        GravatarModule,
+        MdDialogModule
     ],
   declarations: [
     AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
-    UserCreateComponent, ForgottenPasswordComponent, ResetPasswordComponent
+    UserCreateComponent, ForgottenPasswordComponent, ForgottenPasswordDialog, ResetPasswordComponent
   ],
 
   providers: [
       BookService,
       UserService,
       OwnershipService,
-      AuthenticationService
+      AuthenticationService,
+      PasswordService
   ],
+
+  entryComponents: [
+    ForgottenPasswordDialog
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

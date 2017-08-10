@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from './user';
-import { AuthenticationService } from './authentication.service';
+import { User } from './_models/user';
+import { AuthenticationService } from './_services/authentication.service';
 
 @Component({
     moduleId: module.id,
@@ -11,9 +11,11 @@ import { AuthenticationService } from './authentication.service';
 })
 
 export class LoggedUserComponent implements OnInit {
+
     private user: User;
 
-    constructor(private authService: AuthenticationService) { }
+    constructor(
+        private authService: AuthenticationService) { }
 
     ngOnInit() {
         this.user = this.authService.user

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import { environment } from '../environments/environment';
-import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import { environment } from '../../environments/environment';
 
-import { User } from './user'
+
+import { User } from '../_models/user'
 
 @Injectable()
 export class AuthenticationService {
@@ -26,9 +25,10 @@ export class AuthenticationService {
         }
     }
 
-    login(login: string, password: string): Observable<boolean> {
+    login(login: string, password: string): Promise<boolean> {
         return this.http.post(this.Url, JSON.stringify({ login: login, password: password }))
-            .map((response: Response) => {
+            .toPromise()
+            .then((response: Response) => {
                 // login successful if there's a jwt token in the response
                 let token = response.json() && response.json().token;
                 if (token) {
@@ -44,7 +44,7 @@ export class AuthenticationService {
                     // return false to indicate failed login
                     return false;
                 }
-            });
+            }).catch();
     }
 
     logout(): void {

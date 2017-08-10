@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
     moduleId: module.id,
@@ -25,8 +25,8 @@ export class UserLoginComponent implements OnInit {
 
     login(): void {
         this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .subscribe(result => {
+        this.authenticationService.login(this.model.login, this.model.password)
+            .then(result => {
                 if (result === true) {
                     // login successful
                     this.router.navigate(['/dashboard']);

@@ -1,14 +1,12 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from './auth.guard';
-import { ActivationGuard } from './activation.guard';
-import { AdminGuard } from './admin.guard';
+import { AuthGuard, ActivationGuard, AdminGuard } from './_guards/index';
 
-import { HomeComponent } from './home.component';
-import { UserCreateComponent } from './user-create.component';
-import { ForgottenPasswordComponent } from './forgotten-password.component';
-import { ResetPasswordComponent } from './reset-password.component';
+import { HomeComponent } from './home/home.component';
+import { UserCreateComponent } from './user-create/user-create.component';
+import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
