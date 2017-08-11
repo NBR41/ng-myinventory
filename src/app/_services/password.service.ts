@@ -16,14 +16,25 @@ export class PasswordService {
     }
 
     sendResetLink(email: String): Promise<boolean> {
-        return this.http.get(this.Url)
+        return this.http.get(this.Url, {params:{"email": email}})
         .toPromise()
         .then(() => true)
         .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error); // for demo purposes only
-      return Promise.reject(error.message || error);
+        if (error.status) {
+            switch (error.status) {
+                case 400:
+                    return Promise.reject("BadRequest");
+                case 422:
+                    return Promise.reject("UnprocessableEntity");
+                case 500:
+                    return Promise.reject("InternalServerError");
+                case 503:
+                    return Promise.reject("ServiceUnavailable");
+            }
+        }
+        return Promise.reject(error.message || error);
     }
 }

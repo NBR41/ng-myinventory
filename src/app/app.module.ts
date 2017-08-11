@@ -7,6 +7,8 @@ import { MdDialogModule } from '@angular/material';
 
 import { GravatarModule } from 'ng2-gravatar-directive';
 import { AppRoutingModule } from './app-routing.module';
+import { AlertModule,  } from './alerts/alert.module';
+import { AlertService } from './alerts/alert.service'
 
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
@@ -24,9 +26,10 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
         BrowserAnimationsModule,
         FormsModule,
         HttpModule,
-        AppRoutingModule,
         GravatarModule,
-        MdDialogModule
+        MdDialogModule,
+        AppRoutingModule,
+        AlertModule
     ],
   declarations: [
     AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
@@ -34,11 +37,12 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
   ],
 
   providers: [
+      AuthenticationService,
+      AlertService,
       BookService,
       UserService,
       OwnershipService,
-      AuthenticationService,
-      PasswordService
+      PasswordService,
   ],
 
   entryComponents: [
