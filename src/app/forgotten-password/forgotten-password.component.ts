@@ -31,7 +31,7 @@ export class ForgottenPasswordComponent {
         private dialog: MdDialog) { }
 
 
-    sendResetLink(): void {
+    sendResetLink(email: string): void {
         this.loading = true;
         this.passwordService.sendResetLink(this.email).then(result => {
             this.loading = false;

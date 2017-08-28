@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
 import { UserLoginComponent} from './user-login/user-login.component';
 import { LoggedUserComponent } from './logged-user.component';
-import { UserCreateComponent } from './user-create/user-create.component';
+import { CreatedAccountDialog, UserCreateComponent } from './user-create/user-create.component';
 import { ForgottenPasswordComponent, ForgottenPasswordDialog } from './forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
@@ -33,7 +33,8 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
     ],
   declarations: [
     AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
-    UserCreateComponent, ForgottenPasswordComponent, ForgottenPasswordDialog, ResetPasswordComponent
+    CreatedAccountDialog, UserCreateComponent,
+    ForgottenPasswordComponent, ForgottenPasswordDialog, ResetPasswordComponent
   ],
 
   providers: [
@@ -46,7 +47,7 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
   ],
 
   entryComponents: [
-    ForgottenPasswordDialog
+    CreatedAccountDialog, ForgottenPasswordDialog
   ],
 
   bootstrap: [AppComponent]

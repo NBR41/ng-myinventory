@@ -1,20 +1,25 @@
+<alert></alert>
 <div class="panel panel-primary medium-box">
     <div class="panel-heading">
         <h2 class="panel-title">Sign up</h2>
     </div>
     <div class="panel-body">
-        <form accept-charset="UTF-8" action="" method="post">
-            <div class="form-group">
+        <form name="form" (ngSubmit)="f.form.valid && create(email.value, nickname.value, password.value)" #f="ngForm" novalidate>
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
                 <label for="email">Email address</label>
-                <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus>
+                <input type="text" name="email" class="form-control" placeholder="Email address" required autofocus [(ngModel)]="model.email" #email="ngModel" [email]="true" />
+                <div *ngIf="f.submitted && !email.valid && email.value==''" class="help-block">Email is required</div>
+                <div *ngIf="f.submitted && !email.valid && email.value!=''" class="help-block">Email is invalid</div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !nickname.valid }">
                 <label for="nickname">Username</label>
-                <input type="" id="nickname" class="form-control" placeholder="Nickname" required>
+                <input type="text" name="nickname" class="form-control" placeholder="Nickname" required [(ngModel)]="model.nickname" #nickname="ngModel">
+                <div *ngIf="(nickname.touched || f.submitted) && !nickname.valid" class="help-block">Nickname is required</div>
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                 <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" placeholder="Password" required>
+                <input type="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="model.password" #password="ngModel">
+                <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
         </form>

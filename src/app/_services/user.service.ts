@@ -37,11 +37,11 @@ export class UserService {
         .catch(this.handleError);
     }
 
-    create(email:string, nickname: string, password: string): Promise<User> {
+    create(email:string, nickname: string, password: string): Promise<boolean> {
       return this.http
         .post(this.Url, JSON.stringify({email: email, nickname: nickname, password: password}), {headers: this.headers})
         .toPromise()
-        .then(res => res.json().data as User)
+        .then(() => true)
         .catch(this.handleError);
     }
 
