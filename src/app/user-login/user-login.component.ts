@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AlertService } from '../alerts/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class UserLoginComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService) { }
+        private alertService: AlertService,
+        private authenticationService: AuthenticationService
+    ) { }
 
     ngOnInit(): void {
         // reset login status
@@ -27,6 +30,7 @@ export class UserLoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.model.login, this.model.password)
             .then(result => {
+              this.loading = false;
                 if (result === true) {
                     // login successful
                     this.router.navigate(['/dashboard']);
@@ -35,7 +39,27 @@ export class UserLoginComponent implements OnInit {
                     this.error = 'Login or password is incorrect';
                     this.loading = false;
                 }
-            });
+            })
+          .catch(error => {
+                this.loading = false;
+                switch (error) {
+                    case "BadRequest":
+                        this.alertService.warn("Your request is not valid");
+                        return null;
+                    case "UnprocessableEntity":
+                        this.alertService.warn("Your login/password doesn't match");
+                        return null;
+                    case "InternalServerError":
+                        this.alertService.error("Your request encountered an unexpected error.");
+                        return null;
+                    case "ServiceUnavailable":
+                        this.alertService.error("Our service is momentarily unavailable.");
+                        return null;
+                    default:
+                        this.alertService.error("Our service is momentarily unavailable.");
+                        return null;
+                }
+            })
     }
 
     gotoCreate(): void {

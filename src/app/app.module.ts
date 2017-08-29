@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
@@ -20,6 +20,8 @@ import { UserCreateComponent } from './user-create/user-create.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 import { BookService,UserService,OwnershipService,AuthenticationService, PasswordService } from './_services/index';
 
 @NgModule({
@@ -35,7 +37,8 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
     ],
   declarations: [
     AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
-    UserCreateComponent, ForgottenPasswordComponent, ResetPasswordComponent
+    UserCreateComponent, ForgottenPasswordComponent, ResetPasswordComponent,
+    DashboardComponent
   ],
 
   providers: [

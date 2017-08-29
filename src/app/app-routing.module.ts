@@ -9,16 +9,18 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
+import { DashboardComponent } from './dashboard/dashboard.component';
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: UserCreateComponent },
   { path: 'forgottenpassword', component: ForgottenPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent },
-  { path: 'login', component: UserLoginComponent }
+  { path: 'login', component: UserLoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] }
   /*
   { path: 'validate', component: UserValidateComponent },
-  { path: 'login', component: LoginComponent },/
   { path: 'definepassword', component: DefinePasswordComponent }
   { path: 'needactivation', component: NeedActivatonComponent, canActivate: [AuthGuard]  }
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] }
@@ -31,7 +33,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  // providers: [AuthGuard, ActivationGuard,AdminGuard ],
+  providers: [ AuthGuard, ActivationGuard, AdminGuard ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

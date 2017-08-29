@@ -14,6 +14,22 @@ export class AuthenticationService {
 
     public token: string;
 
+    private handleError(error: any): Promise<any> {
+        if (error.status) {
+            switch (error.status) {
+                case 400:
+                    return Promise.reject("BadRequest");
+                case 422:
+                    return Promise.reject("UnprocessableEntity");
+                case 500:
+                    return Promise.reject("InternalServerError");
+                case 503:
+                    return Promise.reject("ServiceUnavailable");
+            }
+        }
+        return Promise.reject(error.message || error);
+    }
+
     constructor(private http: Http) {
         this.Url = `${environment.apihost}/authenticate`
 
@@ -44,7 +60,7 @@ export class AuthenticationService {
                     // return false to indicate failed login
                     return false;
                 }
-            }).catch();
+            }).catch(this.handleError);
     }
 
     logout(): void {
