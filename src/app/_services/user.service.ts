@@ -18,8 +18,26 @@ export class UserService {
     }
 
     private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error); // for demo purposes only
-      return Promise.reject(error.message || error);
+        if (error.status) {
+            switch (error.status) {
+                case 400:
+                    return Promise.reject("BadRequest");
+                case 422:
+                    switch (error.json().detail) {
+                        case 'duplicate email':
+                            return Promise.reject("DuplicateEmail");
+                        case 'duplicate nickname':
+                            return Promise.reject("DuplicateNickname");
+                        default:
+                            return Promise.reject("UnprocessableEntity");
+                    }
+                case 500:
+                    return Promise.reject("InternalServerError");
+                case 503:
+                    return Promise.reject("ServiceUnavailable");
+            }
+        }
+        return Promise.reject(error.message || error);
     }
 
     getUsers(): Promise<User[]> {

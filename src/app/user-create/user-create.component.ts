@@ -1,17 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
 import { UserService } from '../_services/user.service';
 import { AlertService } from '../alerts/alert.service';
+import { DialogService } from '../dialog/dialog.service';
 
 import { User } from '../_models/user'
-
-@Component({
-    selector: 'dialog-created-account',
-    templateUrl: 'dialog.html'
-})
-export class CreatedAccountDialog {
-}
 
 @Component({
     moduleId: module.id,
@@ -26,23 +19,29 @@ export class UserCreateComponent {
   constructor(
       private router: Router,
       private alertService: AlertService,
+      private dialogService: DialogService,
       private userService: UserService,
-      private dialog: MdDialog) { }
+  ) { }
 
   create(email: string, nickname: string, password: string): void {
       this.loading = true;
       this.userService.create(email, nickname, password).then(() => {
           this.loading = false;
-          this.openDialog()
+          this.dialogService.success('Your account is created', 'Your account has been successfully created. An email has been sent to you, in order to finalize your subscription. Please click the link inside to validate your account.', '/login')
       }).catch(error => {
           this.loading = false;
-          console.log(error)
           switch (error) {
               case "BadRequest":
-                  this.alertService.warn("Your email is not valid");
+                  this.alertService.warn("Your request is not valid");
+                  return null;
+              case "DuplicateEmail":
+                  this.alertService.warn("Your email is already used");
+                  return null;
+              case "DuplicateNickname":
+                  this.alertService.warn("Your nickname is already used");
                   return null;
               case "UnprocessableEntity":
-                  this.alertService.warn("Your email was not found");
+                  this.alertService.warn("Your email and your nickname are already used");
                   return null;
               case "InternalServerError":
                   this.alertService.error("Your request encountered an unexpected error.");
@@ -55,10 +54,5 @@ export class UserCreateComponent {
                   return null;
           }
       })
-  }
-
-  openDialog() {
-      let dialogref = this.dialog.open(CreatedAccountDialog, {disableClose: true, panelClass: "custom-dialog"});
-      dialogref.afterClosed().subscribe(() => this.router.navigate(['/login']));
   }
 }

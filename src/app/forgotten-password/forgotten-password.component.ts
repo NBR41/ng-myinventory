@@ -1,15 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MdDialog, MdDialogRef } from '@angular/material';
 import { PasswordService } from '../_services/password.service';
 import { AlertService } from '../alerts/alert.service';
-
-@Component({
-    selector: 'dialog-forgotten-password',
-    templateUrl: 'dialog.html'
-})
-export class ForgottenPasswordDialog {
-}
+import { DialogService } from '../dialog/dialog.service';
 
 
 @Component({
@@ -27,8 +20,9 @@ export class ForgottenPasswordComponent {
     constructor(
         private router: Router,
         private alertService: AlertService,
+        private dialogService: DialogService,
         private passwordService: PasswordService,
-        private dialog: MdDialog) { }
+    ) { }
 
 
     sendResetLink(email: string): void {
@@ -37,7 +31,7 @@ export class ForgottenPasswordComponent {
             this.loading = false;
             if (result === true) {
                 // login successful
-                this.openDialog()
+                this.dialogService.success("Password reset link was sent", "A mail has been sent to you. Please click the link inside to reset your password.", '/home')
             } else {
                 // login failed
                 this.error = 'Not known Email';
@@ -62,10 +56,5 @@ export class ForgottenPasswordComponent {
                     return null;
             }
         })
-    }
-
-    openDialog() {
-        let dialogref = this.dialog.open(ForgottenPasswordDialog, {disableClose: true, panelClass: "custom-dialog"});
-        dialogref.afterClosed().subscribe(() => this.router.navigate(['/home']));
     }
 }

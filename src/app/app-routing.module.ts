@@ -5,6 +5,7 @@ import { AuthGuard, ActivationGuard, AdminGuard } from './_guards/index';
 
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user-create/user-create.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'signup', component: UserCreateComponent },
   { path: 'forgottenpassword', component: ForgottenPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent },
+  { path: 'login', component: UserLoginComponent }
   /*
   { path: 'validate', component: UserValidateComponent },
   { path: 'login', component: LoginComponent },/
