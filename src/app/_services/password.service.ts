@@ -23,4 +23,12 @@ export class PasswordService extends BaseService {
             .then(() => true)
             .catch(this.handleError);
     }
+
+    resetPassword(password: string, token: string): Promise<boolean> {
+      return this.http
+          .post(this.Url, JSON.stringify({password: password, token: token}), {headers: this.getHeaders()})
+          .toPromise()
+          .then(() => true)
+          .catch(this.handleError);
+    }
 }

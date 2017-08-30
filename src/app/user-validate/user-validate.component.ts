@@ -21,7 +21,7 @@ export class UserValidateComponent extends UserNeedValidateComponent implements 
 
     constructor(
         protected router: Router,
-        protected activatedRoute: ActivatedRoute,
+        protected route: ActivatedRoute,
         protected alertService: AlertService,
         protected dialogService: DialogService,
         protected authService: AuthenticationService,
@@ -31,7 +31,7 @@ export class UserValidateComponent extends UserNeedValidateComponent implements 
     }
 
     ngOnInit() {
-        this.activatedRoute.queryParams.subscribe(params => {
+        this.route.queryParams.subscribe(params => {
             if (params['t']) {
                 this.validationService.validateUser(this.authService.user.id, this.authService.token, params['t']).then(() => {
                     this.authService.user.is_verified = true
