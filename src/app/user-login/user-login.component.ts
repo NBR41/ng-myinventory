@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AlertService } from '../alerts/alert.service';
@@ -13,7 +13,9 @@ import { AuthenticationService } from '../_services/authentication.service';
 export class UserLoginComponent implements OnInit {
     model: any = {};
     loading = false;
-    error = '';
+
+    @Input() displayLinks: boolean = false;
+
 
     constructor(
         private router: Router,
@@ -31,14 +33,7 @@ export class UserLoginComponent implements OnInit {
         this.authenticationService.login(this.model.login, this.model.password)
             .then(result => {
               this.loading = false;
-                if (result === true) {
-                    // login successful
-                    this.router.navigate(['/dashboard']);
-                } else {
-                    // login failed
-                    this.error = 'Login or password is incorrect';
-                    this.loading = false;
-                }
+              this.router.navigate(['/dashboard']);
             })
           .catch(error => {
                 this.loading = false;
@@ -67,6 +62,6 @@ export class UserLoginComponent implements OnInit {
     }
 
     gotoForgottenPassword(): void {
-        this.router.navigate(['/forgottenpassword'])
+        this.router.navigate(['/password/forgotten'])
     }
 }

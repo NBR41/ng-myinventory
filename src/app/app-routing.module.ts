@@ -6,24 +6,24 @@ import { AuthGuard, ActivationGuard, AdminGuard } from './_guards/index';
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserLoginComponent } from './user-login/user-login.component';
-import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { UserNeedValidateComponent } from './user-validate/user-needvalidate.component';
+import { UserValidateComponent } from './user-validate/user-validate.component';
+import { ForgottenPasswordComponent } from './reset-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'signup', component: UserCreateComponent },
-  { path: 'forgottenpassword', component: ForgottenPasswordComponent },
-  { path: 'resetpassword', component: ResetPasswordComponent },
+  { path: 'password/forgotten', component: ForgottenPasswordComponent },
+  { path: 'password/reset', component: ResetPasswordComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] },
+  { path: 'user/needactivation', component: UserNeedValidateComponent, canActivate: [AuthGuard] },
+  { path: 'user/validate', component: UserValidateComponent }
   /*
-  { path: 'validate', component: UserValidateComponent },
   { path: 'definepassword', component: DefinePasswordComponent }
-  { path: 'needactivation', component: NeedActivatonComponent, canActivate: [AuthGuard]  }
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] }
   { path: 'user', component: UserDetailComponent, canActivate: [AuthGuard, ActivationGuard] }
   { path: 'book', component: BookDetailComponent, canActivate: [AuthGuard, ActivationGuard] }
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard, ActivationGuard, AdminGuard]  }

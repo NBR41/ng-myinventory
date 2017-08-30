@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { environment } from '../../environments/environment';
-
-
-import { User } from '../_models/user'
+import { BaseService } from './base.service';
+import { User } from '../_models/user';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService extends BaseService {
 
     private Url: string;
 
@@ -14,23 +13,8 @@ export class AuthenticationService {
 
     public token: string;
 
-    private handleError(error: any): Promise<any> {
-        if (error.status) {
-            switch (error.status) {
-                case 400:
-                    return Promise.reject("BadRequest");
-                case 422:
-                    return Promise.reject("UnprocessableEntity");
-                case 500:
-                    return Promise.reject("InternalServerError");
-                case 503:
-                    return Promise.reject("ServiceUnavailable");
-            }
-        }
-        return Promise.reject(error.message || error);
-    }
-
-    constructor(private http: Http) {
+    constructor(protected http: Http) {
+        super(http)
         this.Url = `${environment.apihost}/authenticate`
 
         // set token if saved in local storage
@@ -42,7 +26,8 @@ export class AuthenticationService {
     }
 
     login(login: string, password: string): Promise<boolean> {
-        return this.http.post(this.Url, JSON.stringify({ login: login, password: password }))
+        return this.http
+            .post(this.Url, JSON.stringify({ login: login, password: password }), {headers: this.getHeaders()})
             .toPromise()
             .then((response: Response) => {
                 // login successful if there's a jwt token in the response

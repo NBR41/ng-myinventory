@@ -16,7 +16,7 @@ export class ActivationGuard implements CanActivate {
             return true;
         }
 
-        this.router.navigate(['/needactivation']);
+        this.router.navigate(['/user/needactivation']);
         return false;
     }
 }

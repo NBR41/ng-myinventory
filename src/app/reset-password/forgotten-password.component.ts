@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PasswordService } from '../_services/password.service';
 import { AlertService } from '../alerts/alert.service';
@@ -15,7 +15,6 @@ export class ForgottenPasswordComponent {
 
     email: string;
     loading = false;
-    error = '';
 
     constructor(
         private router: Router,
@@ -29,13 +28,11 @@ export class ForgottenPasswordComponent {
         this.loading = true;
         this.passwordService.sendResetLink(this.email).then(result => {
             this.loading = false;
-            if (result === true) {
-                // login successful
-                this.dialogService.success("Password reset link was sent", "A mail has been sent to you. Please click the link inside to reset your password.", '/home')
-            } else {
-                // login failed
-                this.error = 'Not known Email';
-            }
+            this.dialogService.success(
+                "Password reset link was sent",
+                "A mail has been sent to you. Please click the link inside to reset your password.",
+                "/home"
+            )
         }).catch(error => {
             this.loading = false;
             switch (error) {

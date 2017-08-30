@@ -15,14 +15,16 @@ import { DialogService } from './dialog/dialog.service'
 import { AppComponent } from './app.component';
 import { HomeComponent} from './home/home.component';
 import { UserLoginComponent} from './user-login/user-login.component';
+import { UserNeedValidateComponent } from './user-validate/user-needvalidate.component';
+import { UserValidateComponent } from './user-validate/user-validate.component';
 import { LoggedUserComponent } from './logged-user.component';
 import { UserCreateComponent } from './user-create/user-create.component';
-import { ForgottenPasswordComponent } from './forgotten-password/forgotten-password.component';
+import { ForgottenPasswordComponent } from './reset-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-import { BookService,UserService,OwnershipService,AuthenticationService, PasswordService } from './_services/index';
+import { BookService,UserService,OwnershipService,AuthenticationService, PasswordService, ValidationService } from './_services/index';
 
 @NgModule({
     imports: [
@@ -36,19 +38,15 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
         DialogModule,
     ],
   declarations: [
-    AppComponent, HomeComponent, UserLoginComponent, LoggedUserComponent,
-    UserCreateComponent, ForgottenPasswordComponent, ResetPasswordComponent,
+    AppComponent, HomeComponent, LoggedUserComponent,
+    UserCreateComponent, UserLoginComponent, UserNeedValidateComponent, UserValidateComponent,
+    ForgottenPasswordComponent, ResetPasswordComponent,
     DashboardComponent
   ],
 
   providers: [
-      AlertService,
-      DialogService,
-      AuthenticationService,
-      BookService,
-      UserService,
-      OwnershipService,
-      PasswordService,
+      AlertService, DialogService,
+      AuthenticationService, BookService, UserService, OwnershipService, PasswordService, ValidationService
   ],
 
   bootstrap: [AppComponent]

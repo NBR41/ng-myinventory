@@ -10,4 +10,8 @@ import { AuthenticationService } from '../_services/authentication.service';
 })
 
 export class ResetPasswordComponent {
+    model: any = {};
+    loading = false;
+
+    
 }

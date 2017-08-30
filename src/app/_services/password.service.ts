@@ -1,40 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { environment } from '../../environments/environment';
+import { BaseService } from './base.service'
 
 import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class PasswordService {
+export class PasswordService extends BaseService {
+
     private Url: string;  // URL to web api
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-
-    constructor(private http: Http) {
+    constructor(protected http: Http) {
+        super(http)
         this.Url = `${environment.apihost}/password`;
     }
 
     sendResetLink(email: String): Promise<boolean> {
-        return this.http.get(this.Url, {params:{"email": email}})
-        .toPromise()
-        .then(() => true)
-        .catch(this.handleError);
-    }
-
-    private handleError(error: any): Promise<any> {
-        if (error.status) {
-            switch (error.status) {
-                case 400:
-                    return Promise.reject("BadRequest");
-                case 422:
-                    return Promise.reject("UnprocessableEntity");
-                case 500:
-                    return Promise.reject("InternalServerError");
-                case 503:
-                    return Promise.reject("ServiceUnavailable");
-            }
-        }
-        return Promise.reject(error.message || error);
+        return this.http
+            .get(this.Url, {params: {"email": email}, headers: this.getHeaders()})
+            .toPromise()
+            .then(() => true)
+            .catch(this.handleError);
     }
 }

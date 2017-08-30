@@ -1,0 +1,13 @@
+<alert></alert>
+<div *ngIf="errorMsg"class="panel panel-warning medium-box">
+    <div class="panel-heading">
+        <h2 class="panel-title">Error while validating your account</h2>
+    </div>
+    <div class="panel-body">
+        <p>{{errorMsg}}</p>
+        <div *ngIf="displayRetry">
+            <p>Retry your validation. By Clicking the button below we'll send you a new validation mail.</p>
+            <button class="btn btn-info" (click)="sendValidationMail()" type="button">Send validation mail</button>
+        </div>
+    </div>
+</div>

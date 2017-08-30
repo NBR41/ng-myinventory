@@ -27,7 +27,11 @@ export class UserCreateComponent {
       this.loading = true;
       this.userService.create(email, nickname, password).then(() => {
           this.loading = false;
-          this.dialogService.success('Your account is created', 'Your account has been successfully created. An email has been sent to you, in order to finalize your subscription. Please click the link inside to validate your account.', '/login')
+          this.dialogService.success(
+              "Your account is created",
+              "Your account has been successfully created. An email has been sent to you, in order to finalize your subscription. Please click the link inside to validate your account.",
+              "/login"
+          )
       }).catch(error => {
           this.loading = false;
           switch (error) {
