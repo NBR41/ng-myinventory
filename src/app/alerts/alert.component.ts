@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Alert, AlertType } from './models';
 import { AlertService } from './alert.service';
 
@@ -8,8 +7,8 @@ import { AlertService } from './alert.service';
     selector: 'alert',
     templateUrl: 'alert.component.html'
 })
-
 export class AlertComponent {
+
     alerts: Alert[] = [];
 
     constructor(private alertService: AlertService) { }

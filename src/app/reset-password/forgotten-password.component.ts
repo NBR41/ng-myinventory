@@ -4,13 +4,11 @@ import { PasswordService } from '../_services/password.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
 
-
 @Component({
     moduleId: module.id,
     selector: 'forgotten-password',
     templateUrl: 'forgotten-password.component.html'
 })
-
 export class ForgottenPasswordComponent {
 
     email: string;
@@ -22,7 +20,6 @@ export class ForgottenPasswordComponent {
         private dialogService: DialogService,
         private passwordService: PasswordService,
     ) { }
-
 
     sendResetLink(email: string): void {
         this.loading = true;

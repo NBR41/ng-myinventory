@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 
+// redirect to need activation if user is not activated
 @Injectable()
 export class ActivationGuard implements CanActivate {
 
@@ -11,8 +12,7 @@ export class ActivationGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        if (this.authservice.user && this.authservice.user.is_verified) {
-            // verified so return true
+        if (this.authservice.user && this.authservice.user.is_validated) {
             return true;
         }
 

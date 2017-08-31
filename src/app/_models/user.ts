@@ -4,6 +4,6 @@ export class User {
     nickname: string;
     password: string;
     is_admin: boolean;
-    is_verified: boolean;
+    is_validated: boolean;
     href: string;
 }

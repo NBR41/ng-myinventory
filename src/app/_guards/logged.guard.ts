@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
 
-// redirect to home if not admin on protected path
+// redirect to dashboard page if logged user on non logged path
 @Injectable()
-export class AdminGuard implements CanActivate {
+export class LoggedGuard implements CanActivate {
 
     constructor(
         private router: Router,
@@ -12,13 +12,11 @@ export class AdminGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        if (this.authservice.user && this.authservice.user.is_admin) {
-            // admin so return true
+        if (!this.authservice.user) {
             return true;
         }
 
-        // not logged in so redirect to home page
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
         return false;
     }
 }

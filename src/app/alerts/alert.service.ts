@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
+import { Alert, AlertType } from './models';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
-
-import { Alert, AlertType } from './models';
 
 @Injectable()
 export class AlertService {
@@ -54,7 +53,6 @@ export class AlertService {
     }
 
     clear() {
-        // clear alerts
         this.subject.next();
     }
 }

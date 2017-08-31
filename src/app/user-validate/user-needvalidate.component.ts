@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AuthenticationService } from '../_services/authentication.service';
 import { ValidationService } from '../_services/validation.service';
 import { AlertService } from '../alerts/alert.service';
@@ -11,7 +10,6 @@ import { DialogService } from '../dialog/dialog.service';
     selector: 'user-needvalidate',
     templateUrl: 'user-needvalidate.component.html'
 })
-
 export class UserNeedValidateComponent {
 
     constructor(

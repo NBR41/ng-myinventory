@@ -1,37 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import { BaseService } from './base.service';
+import { Book } from '../_models/book';
 import { environment } from '../../environments/environment';
-
 import 'rxjs/add/operator/toPromise';
 
-import { Book } from '../_models/book';
-
 @Injectable()
-export class BookService {
+export class BookService extends BaseService  {
 
     private Url: string;
 
-    private headers = new Headers({'Content-Type': 'application/json'});
-
-    constructor(private http: Http) {
+    constructor(protected http: Http) {
+        super(http)
         this.Url = `${environment.apihost}/books`;
-}
-
-    private handleError(error: any): Promise<any> {
-      console.error('An error occurred', error); // for demo purposes only
-      return Promise.reject(error.message || error);
     }
 
     getBooks(): Promise<Book[]> {
-        return this.http.get(this.Url)
-             .toPromise()
-             .then(response => response.json().data as Book[])
-             .catch(this.handleError);
+        return this.http
+          .get(this.Url, {headers: this.getHeaders()})
+          .toPromise()
+          .then(response => response.json().data as Book[])
+          .catch(this.handleError);
     }
 
     getBook(id: number): Promise<Book> {
       const url = `${this.Url}/${id}`;
-      return this.http.get(url)
+      return this.http
+        .get(url, {headers: this.getHeaders()})
         .toPromise()
         .then(response => response.json().data as Book)
         .catch(this.handleError);
@@ -39,7 +34,7 @@ export class BookService {
 
     create(isbn: string, name: string): Promise<Book> {
       return this.http
-        .post(this.Url, JSON.stringify({isbn: isbn, name: name}), {headers: this.headers})
+        .post(this.Url, JSON.stringify({isbn: isbn, name: name}), {headers: this.getHeaders()})
         .toPromise()
         .then(res => res.json().data as Book)
         .catch(this.handleError);
@@ -47,7 +42,7 @@ export class BookService {
 
     createWithIsbn(isbn: string): Promise<Book> {
       return this.http
-        .post(this.Url, JSON.stringify({isbn: isbn}), {headers: this.headers})
+        .post(this.Url, JSON.stringify({isbn: isbn}), {headers: this.getHeaders()})
         .toPromise()
         .then(res => res.json().data as Book)
         .catch(this.handleError);
@@ -56,7 +51,7 @@ export class BookService {
     update(book: Book): Promise<Book> {
       const url = `${this.Url}/${book.id}`;
       return this.http
-        .put(url, JSON.stringify({name: name}), {headers: this.headers})
+        .put(url, JSON.stringify({name: name}), {headers: this.getHeaders()})
         .toPromise()
         .then(() => book)
         .catch(this.handleError);
@@ -64,7 +59,8 @@ export class BookService {
 
     delete(id: number): Promise<void> {
       const url = `${this.Url}/${id}`;
-      return this.http.delete(url, {headers: this.headers})
+      return this.http
+        .delete(url, {headers: this.getHeaders()})
         .toPromise()
         .then(() => null)
         .catch(this.handleError);

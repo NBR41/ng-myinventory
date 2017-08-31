@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-
+import { UserNeedValidateComponent } from './user-needvalidate.component';
 import { AuthenticationService } from '../_services/authentication.service';
 import { ValidationService } from '../_services/validation.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
-
-import { UserNeedValidateComponent } from './user-needvalidate.component';
 
 @Component({
     moduleId: module.id,
     selector: 'user-validate',
     templateUrl: 'user-validate.component.html'
 })
-
 export class UserValidateComponent extends UserNeedValidateComponent implements OnInit {
 
     private errorMsg: string;
@@ -33,14 +30,17 @@ export class UserValidateComponent extends UserNeedValidateComponent implements 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
             if (params['t']) {
-                this.validationService.validateUser(this.authService.user.id, this.authService.token, params['t']).then(() => {
-                    this.authService.user.is_verified = true
+                this.validationService.validateUser(params['t']).then(() => {
+                    if (this.authService.user) {
+                        this.authService.user.is_validated = true
+                    }
                     this.dialogService.success(
                         "Your account is validated",
                         "Your account has been successfully validated.",
-                        "/dashboard"
+                        "/login"
                     )
                 }).catch(error => {
+                    console.log(error)
                     switch (error) {
                         case "BadRequest":
                             this.errorMsg = "Your request is not valid";

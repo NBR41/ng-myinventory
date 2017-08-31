@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { environment } from '../../environments/environment';
+import { Http } from '@angular/http';
 import { BaseService } from './base.service';
-
-import 'rxjs/add/operator/toPromise';
-
 import { User } from '../_models/user';
+import { environment } from '../../environments/environment';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -18,11 +16,11 @@ export class UserService extends BaseService {
     }
 
     getUsers(): Promise<User[]> {
-        return this.http
-            .get(this.Url, {headers: this.getHeaders()})
-            .toPromise()
-            .then(response => response.json().data as User[])
-            .catch(this.handleError);
+      return this.http
+        .get(this.Url, {headers: this.getHeaders()})
+        .toPromise()
+        .then(response => response.json().data as User[])
+        .catch(this.handleError);
     }
 
     getUser(id: number): Promise<User> {

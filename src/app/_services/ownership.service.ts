@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { sprintf } from 'sprintf-js';
-import { environment } from '../../environments/environment';
+import { Http } from '@angular/http';
 import { BaseService } from './base.service';
 import { Ownership } from '../_models/ownership';
-
+import { environment } from '../../environments/environment';
+import { sprintf } from 'sprintf-js';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

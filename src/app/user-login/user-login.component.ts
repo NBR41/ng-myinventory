@@ -1,6 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { AlertService } from '../alerts/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
 
@@ -9,24 +8,17 @@ import { AuthenticationService } from '../_services/authentication.service';
     selector: 'user-login',
     templateUrl: 'user-login.component.html'
 })
+export class UserLoginComponent {
 
-export class UserLoginComponent implements OnInit {
     model: any = {};
     loading = false;
-
     @Input() displayLinks: boolean = false;
-
 
     constructor(
         private router: Router,
         private alertService: AlertService,
         private authenticationService: AuthenticationService
     ) { }
-
-    ngOnInit(): void {
-        // reset login status
-        this.authenticationService.logout();
-    }
 
     login(): void {
         this.loading = true;

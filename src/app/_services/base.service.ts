@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 
 export class BaseService {
@@ -7,8 +6,7 @@ export class BaseService {
 
     private tokenHeaders = new Headers({'Content-Type': 'application/json'});
 
-    constructor(protected http: Http) {
-    }
+    constructor(protected http: Http) {}
 
     protected handleError(error: any): Promise<any> {
         if (error.status) {

@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard, ActivationGuard, AdminGuard } from './_guards/index';
+import { AuthGuard, ActivationGuard, AdminGuard, LoggedGuard } from './_guards/index';
 
 import { HomeComponent } from './home/home.component';
 import { UserCreateComponent } from './user-create/user-create.component';
@@ -15,13 +15,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'signup', component: UserCreateComponent },
-  { path: 'password/forgotten', component: ForgottenPasswordComponent },
-  { path: 'password/reset', component: ResetPasswordComponent },
-  { path: 'login', component: UserLoginComponent },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] },
+  { path: 'signup', component: UserCreateComponent, canActivate: [LoggedGuard] },
+  { path: 'password/forgotten', component: ForgottenPasswordComponent, canActivate: [LoggedGuard] },
+  { path: 'password/reset', component: ResetPasswordComponent, canActivate: [LoggedGuard] },
+  { path: 'login', component: UserLoginComponent, canActivate: [LoggedGuard] },
+  { path: 'user/validate', component: UserValidateComponent, canActivate: [LoggedGuard] },
   { path: 'user/needactivation', component: UserNeedValidateComponent, canActivate: [AuthGuard] },
-  { path: 'user/validate', component: UserValidateComponent }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard, ActivationGuard] },
+
   /*
   { path: 'definepassword', component: DefinePasswordComponent }
   { path: 'user', component: UserDetailComponent, canActivate: [AuthGuard, ActivationGuard] }
@@ -33,7 +34,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  providers: [ AuthGuard, ActivationGuard, AdminGuard ],
+  providers: [ AuthGuard, ActivationGuard, AdminGuard,LoggedGuard ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

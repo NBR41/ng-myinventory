@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Http } from '@angular/http';
+import { BaseService } from './base.service';
 import { environment } from '../../environments/environment';
-import { BaseService } from './base.service'
-
 import 'rxjs/add/operator/toPromise';
-
 
 @Injectable()
 export class PasswordService extends BaseService {
@@ -17,18 +15,18 @@ export class PasswordService extends BaseService {
     }
 
     sendResetLink(email: String): Promise<boolean> {
-        return this.http
-            .get(this.Url, {params: {"email": email}, headers: this.getHeaders()})
-            .toPromise()
-            .then(() => true)
-            .catch(this.handleError);
+      return this.http
+        .get(this.Url, {params: {"email": email}, headers: this.getHeaders()})
+        .toPromise()
+        .then(() => true)
+        .catch(this.handleError);
     }
 
     resetPassword(password: string, token: string): Promise<boolean> {
       return this.http
-          .post(this.Url, JSON.stringify({password: password, token: token}), {headers: this.getHeaders()})
-          .toPromise()
-          .then(() => true)
-          .catch(this.handleError);
+        .post(this.Url, JSON.stringify({password: password, token: token}), {headers: this.getHeaders()})
+        .toPromise()
+        .then(() => true)
+        .catch(this.handleError);
     }
 }

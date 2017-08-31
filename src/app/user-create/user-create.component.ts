@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
-
 import { User } from '../_models/user'
 
 @Component({
@@ -11,8 +10,8 @@ import { User } from '../_models/user'
     selector: 'user-create',
     templateUrl: 'user-create.component.html'
 })
-
 export class UserCreateComponent {
+
   model: any = {}
   loading = false;
 

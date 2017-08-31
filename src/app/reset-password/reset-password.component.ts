@@ -9,10 +9,9 @@ import { DialogService } from '../dialog/dialog.service';
     selector: 'reset-password',
     templateUrl: 'reset-password.component.html'
 })
-
 export class ResetPasswordComponent  implements OnInit {
+
     model: any = {};
-    invalid = false
     loading = false;
 
     constructor(
