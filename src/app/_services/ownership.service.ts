@@ -20,7 +20,7 @@ export class OwnershipService extends BaseService {
       return this.http
         .get(sprintf(this.Urlfmt, user_id), {headers: this.getTokenHeaders(user_token)})
         .toPromise()
-        .then(response => response.json().data as Ownership[])
+        .then(response => response.json() as Ownership[])
         .catch(this.handleError);
     }
 
@@ -42,7 +42,7 @@ export class OwnershipService extends BaseService {
 
     add(user_id: number, user_token: string, isbn: string): Promise<Ownership> {
       return this.http
-        .post(sprintf(this.Urlfmt, user_id), JSON.stringify({isbn: isbn}), {headers: this.getTokenHeaders(user_token)})
+        .post(sprintf(this.Urlfmt, user_id)+'/isbn', JSON.stringify({isbn: isbn}), {headers: this.getTokenHeaders(user_token)})
         .toPromise()
         .then(res => res.json().data as Ownership)
         .catch(this.handleError);

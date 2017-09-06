@@ -41,7 +41,7 @@ export class BaseService {
     }
 
     protected getTokenHeaders(userToken: string): Headers {
-        this.tokenHeaders.append('Authorization', 'Bearer ' + userToken)
+        this.tokenHeaders.set('Authorization', 'Bearer ' + userToken)
         return this.tokenHeaders
     }
 }
