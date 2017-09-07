@@ -13,10 +13,15 @@ export class HomeComponent implements OnInit {
     constructor(private authService: AuthenticationService) { }
 
     ngOnInit() {
-        if (this.authService.user) {
-            this.user = this.authService.user
-        } else {
-            this.user = null
-        }
+      if (this.authService.user) {
+          this.user = this.authService.user;
+      }
+      this.authService.getUser().subscribe((user: User) => {
+          if (!user) {
+              this.user = null;
+          } else {
+              this.user = user;
+          }
+      });
     }
 }

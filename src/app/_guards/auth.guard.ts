@@ -12,18 +12,10 @@ export class AuthGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        if (!this.authservice.user && this.authservice.canAutoAuth()) {
-            this.authservice.autoAuth().then(() => this.checkAuth())
-        } else {
-            return this.checkAuth()
-        }
-    }
-
-    checkAuth(): boolean {
-        if (this.authservice.user) {
-            return true;
-        }
-        this.router.navigate(['/login']);
-        return false;
+      if (this.authservice.user) {
+          return true;
+      }
+      this.router.navigate(['/login']);
+      return false;
     }
 }

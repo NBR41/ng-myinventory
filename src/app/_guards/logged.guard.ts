@@ -12,7 +12,6 @@ export class LoggedGuard implements CanActivate {
     ) { }
 
     canActivate() {
-        console.log("guard LoggedGuard")
         if (!this.authservice.user) {
             return true;
         }

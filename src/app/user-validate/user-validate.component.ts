@@ -40,7 +40,6 @@ export class UserValidateComponent extends UserNeedValidateComponent implements 
                         "/login"
                     )
                 }).catch(error => {
-                    console.log(error)
                     switch (error) {
                         case "BadRequest":
                             this.errorMsg = "Your request is not valid";

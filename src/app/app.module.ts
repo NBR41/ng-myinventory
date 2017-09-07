@@ -33,9 +33,9 @@ import { BookService,UserService,OwnershipService,AuthenticationService, Passwor
         FormsModule,
         HttpModule,
         GravatarModule,
-        AppRoutingModule,
         AlertModule,
         DialogModule,
+        AppRoutingModule,
     ],
   declarations: [
     AppComponent, HomeComponent, LoggedUserComponent,

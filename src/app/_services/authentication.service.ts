@@ -31,27 +31,22 @@ export class AuthenticationService extends BaseService {
         this.tokenUrl = `${environment.apihost}/token`
         this.refresh_token = localStorage.getItem('authinfo')
         // set token if saved in local storage
-        if (this.canAutoAuth()) {
-            this.autoAuth()
+        if (this.refresh_token != null && this.user == null) {
+            let urltogo = window.location.pathname+window.location.search;
+            this.autoAuth(urltogo)
         }
     }
 
-    canAutoAuth(): boolean {
-        return this.refresh_token != null
-    }
-
-    autoAuth(): Promise<boolean> {
-        // set token if saved in local storage
-        if (this.refresh_token) {
-            return this.authByToken(this.refresh_token).then((ret: boolean) => {
-                if (!ret) {
-                    this.logout();
-                    this.router.navigate['/home'];
-                }
-                return ret;
-            });
-        }
-        return new Promise(() => false);
+    private autoAuth(url: string): Promise<boolean> {
+      return this.authByToken(this.refresh_token).then((ret: boolean) => {
+            if (!ret) {
+                this.logout();
+                this.router.navigate['/home'];
+                return false;
+            }
+            this.router.navigateByUrl(url);
+            return true;
+        });
     }
 
     private authByToken(token: string): Promise<boolean> {
@@ -59,9 +54,7 @@ export class AuthenticationService extends BaseService {
             .get(this.tokenUrl+"/auth", {headers: this.getTokenHeaders(token)})
             .toPromise()
             .then((response: Response) => this.initAuth(response))
-            .catch(() => {
-                return false;
-            });
+            .catch(() => false);
     }
 
     getUser(): Observable<any> {
