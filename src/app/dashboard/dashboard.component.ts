@@ -12,6 +12,7 @@ import { Ownership } from '../_models/ownership';
 })
 export class DashboardComponent implements OnInit {
 
+    user: User;
     ownerships: Ownership[] = [];
 
     constructor(
@@ -21,6 +22,7 @@ export class DashboardComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.user = this.authService.user;
         this.getOwnerships();
     }
 

@@ -1,9 +1,38 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <div class="navbar-header"><a class="navbar-brand" routerLink="/home">GoMyInventory</a></div>
-    <div id="navbar" class="navbar-collapse collapse navbar-right">
-        <logged-user></logged-user>
+    <div class="navbar-header">
+        <button *ngIf="user && user.is_admin" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar-links" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" routerLink="/home">GoMyInventory</a>
+        <div *ngIf="user" class="visible-xs-block">
+            <a class="btn btn-success nav-logged" routerLink="/dashboard"><strong>{{user.nickname}}</strong></a>
+            <a class="btn btn-danger nav-logged" (click)="logout()" role="button">Logout</a>
+        </div>
+    </div>
+    <div *ngIf="user && user.is_admin" id="bs-navbar-links" class="navbar-collapse collapse navbar-left">
+        <ul class="nav navbar-nav">
+          <li><a routerLink="/home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li *ngIf="user && user.is_admin" class="dropdown" >
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a routerLink="/books">Books</a></li>
+              <li><a href="#">Users</a></li>
+            </ul>
+          </li>
+        </ul>
+    </div>
+    <div id="bs-navbar-user" class="navbar-collapse collapse navbar-right">
+        <div *ngIf="user">
+            <img gravatar [email]="user.email" [size]="40" alt="gravatar" class="nav-logged" />
+            <a class="btn btn-success nav-logged" routerLink="/dashboard"><strong>{{user.nickname}}</strong></a>
+            <a class="btn btn-danger nav-logged" (click)="logout()" role="button">Logout</a>
+        </div>
     </div>
   </div>
 </nav>

@@ -1,5 +1,0 @@
-<div *ngIf="user">
-    <a class="navbar-text" routerLink="/dashboard">{{user.nickname}}</a>
-    <img  gravatar [email]="user.email" [size]="40" alt="gravatar" class="nav-logged" />
-    <a class="btn btn-danger nav-logged" (click)="logout()" role="button">Logout</a>
-</div>
