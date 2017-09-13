@@ -1,34 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { BookService } from '../_services/book.service';
-import { Book } from '../_models/book';
+import { UserService } from '../_services/user.service';
+import { User } from '../_models/user';
 
 @Component({
-  selector: 'my-books',
-  templateUrl: './book-list.component.html',
+  selector: 'my-users',
+  templateUrl: './user-list.component.html',
 })
 
-export class BookListComponent implements OnInit {
+export class UserListComponent implements OnInit {
 
-    books: Book[];
+    users: User[];
 
     constructor(
         private router: Router,
         private authService: AuthenticationService,
-        private bookService: BookService,
+        private userService: UserService,
     ) { }
 
     ngOnInit(): void {
-        this.getBooks();
+        this.getUsers();
     }
 
-    getBooks(): void {
-      this.bookService.getBooks().then(books => this.books = books)
+    getUsers(): void {
+      this.userService.getUsers().then(users => this.users = users)
     }
 
-    edit(book: Book): void {
-      this.router.navigate(['/books', book.id]);
+    edit(user: User): void {
+      this.router.navigate(['/users', user.id]);
     }
 /*
     add(name: string): void {
@@ -41,10 +41,10 @@ export class BookListComponent implements OnInit {
         });
     }
 */
-    delete(book: Book): void {
-      this.bookService.delete(book.id, this.authService.token)
+    delete(user: User): void {
+      this.userService.delete(user.id, this.authService.token)
           .then(() => {
-            this.books = this.books.filter(b => b !== book);
+            this.users = this.users.filter(u => u !== user);
           });
     }
 }

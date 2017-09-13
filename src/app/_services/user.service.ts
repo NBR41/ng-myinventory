@@ -3,7 +3,9 @@ import { Http } from '@angular/http';
 import { BaseService } from './base.service';
 import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -19,17 +21,16 @@ export class UserService extends BaseService {
       return this.http
         .get(this.Url, {headers: this.getHeaders()})
         .toPromise()
-        .then(response => response.json().data as User[])
+        .then(response => response.json() as User[])
         .catch(this.handleError);
     }
 
-    getUser(id: number): Promise<User> {
+    getUser(id: number): Observable<User> {
       const url = `${this.Url}/${id}`;
       return this.http
         .get(url, {headers: this.getHeaders()})
-        .toPromise()
-        .then(response => response.json().data as User)
-        .catch(this.handleError);
+        .map(response => response.json() as User)
+        .catch((error: any) => this.handleObservableError(error));
     }
 
     create(email:string, nickname: string, password: string): Promise<boolean> {
@@ -40,10 +41,10 @@ export class UserService extends BaseService {
         .catch(this.handleError);
     }
 
-    update(id: number, user_token: string, nickname: string): Promise<User> {
-      const url = `${this.Url}/${id}`;
+    update(user: User, user_token: string): Promise<User> {
+      const url = `${this.Url}/${user.id}`;
       return this.http
-        .put(url, JSON.stringify({nickname: nickname}), {headers: this.getTokenHeaders(user_token)})
+        .put(url, JSON.stringify({nickname: user.nickname}), {headers: this.getTokenHeaders(user_token)})
         .toPromise()
         .then(() => User)
         .catch(this.handleError);

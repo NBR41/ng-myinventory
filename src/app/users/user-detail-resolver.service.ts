@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Router, Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
-import { BookService }  from '../_services/book.service';
-import { Book }  from '../_models/book';
+import { UserService }  from '../_services/user.service';
+import { User }  from '../_models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class BookDetailResolver implements Resolve<Book> {
+export class UserDetailResolver implements Resolve<User> {
 
   constructor(
       private router: Router,
-      private bookService: BookService,
+      private us: UserService,
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Book> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
     let id = route.paramMap.get('id');
-    return this.bookService.getBook(+id).take(1).map(book => {
-      if (book) {
-        return book;
+    return this.us.getUser(+id).take(1).map(user => {
+      if (user) {
+        return user;
       } else { // id not found
-        this.router.navigate(['/books']);
+        this.router.navigate(['/users']);
         return [];
       }
   }).catch(error => {
-      this.router.navigate(['/books']);
+      this.router.navigate(['/users']);
       return [];
   })
   }

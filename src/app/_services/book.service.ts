@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import { BaseService } from './base.service';
-import { Book } from '../_models/book';
 import { environment } from '../../environments/environment';
+import { Book } from '../_models/book';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';

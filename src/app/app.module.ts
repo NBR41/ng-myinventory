@@ -18,12 +18,15 @@ import { HomeComponent} from './home/home.component';
 import { UserLoginComponent} from './user-login/user-login.component';
 import { UserNeedValidateComponent } from './user-validate/user-needvalidate.component';
 import { UserValidateComponent } from './user-validate/user-validate.component';
-import { UserCreateComponent } from './user-create/user-create.component';
 import { ForgottenPasswordComponent } from './reset-password/forgotten-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 import { BookDetailComponent } from './books/book-detail.component';
 import { BookListComponent } from './books/book-list.component';
+
+import { UserCreateComponent } from './users/user-create.component';
+import { UserDetailComponent } from './users/user-detail.component';
+import { UserListComponent } from './users/user-list.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -50,8 +53,9 @@ import {
     ],
   declarations: [
     AppComponent, PageNotFoundComponent, HomeComponent,
-    UserCreateComponent, UserLoginComponent, UserNeedValidateComponent, UserValidateComponent,
+    UserLoginComponent, UserNeedValidateComponent, UserValidateComponent,
     ForgottenPasswordComponent, ResetPasswordComponent,
+    UserCreateComponent, UserDetailComponent, UserListComponent,
     BookDetailComponent, BookListComponent,
     DashboardComponent
   ],

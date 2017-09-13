@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertService } from '../alerts/alert.service';
 import { AuthenticationService } from '../_services/authentication.service';
+import { AlertService } from '../alerts/alert.service';
 
 @Component({
     moduleId: module.id,
@@ -16,13 +16,13 @@ export class UserLoginComponent {
 
     constructor(
         private router: Router,
+        private authService: AuthenticationService,
         private alertService: AlertService,
-        private authenticationService: AuthenticationService
     ) { }
 
     login(): void {
         this.loading = true;
-        this.authenticationService.login(this.model.login, this.model.password)
+        this.authService.login(this.model.login, this.model.password)
             .then(result => {
               this.loading = false;
               this.router.navigate(['/dashboard']);

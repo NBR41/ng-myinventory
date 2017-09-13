@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../_services/authentication.service';
-import { ValidationService } from '../_services/validation.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
+import { ValidationService } from '../_services/validation.service';
 
 @Component({
     moduleId: module.id,
@@ -14,9 +14,9 @@ export class UserNeedValidateComponent {
 
     constructor(
         protected router: Router,
+        protected authService: AuthenticationService,
         protected alertService: AlertService,
         protected dialogService: DialogService,
-        protected authService: AuthenticationService,
         protected validationService: ValidationService
     ) {
     }

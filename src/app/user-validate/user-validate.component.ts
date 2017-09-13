@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { UserNeedValidateComponent } from './user-needvalidate.component';
 import { AuthenticationService } from '../_services/authentication.service';
-import { ValidationService } from '../_services/validation.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
+import { ValidationService } from '../_services/validation.service';
+import { UserNeedValidateComponent } from './user-needvalidate.component';
 
 @Component({
     moduleId: module.id,
@@ -19,12 +19,12 @@ export class UserValidateComponent extends UserNeedValidateComponent implements 
     constructor(
         protected router: Router,
         protected route: ActivatedRoute,
+        protected authService: AuthenticationService,
         protected alertService: AlertService,
         protected dialogService: DialogService,
-        protected authService: AuthenticationService,
         protected validationService: ValidationService,
     ) {
-        super(router, alertService, dialogService, authService, validationService)
+        super(router, authService, alertService, dialogService, validationService)
     }
 
     ngOnInit() {

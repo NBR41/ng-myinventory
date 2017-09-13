@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
       isbn = isbn.trim();
       if (!isbn) { return; }
       this.ownershipService
-        .add(this.authService.user.id, this.authService.token, isbn)
+        .add(this.authService.user.id, isbn, this.authService.token)
         .then(ownership => { this.ownerships.push(ownership); })
         .catch(error => {
         });

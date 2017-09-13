@@ -10,7 +10,9 @@ export class HomeComponent implements OnInit {
 
     private user: User;
 
-    constructor(private authService: AuthenticationService) { }
+    constructor(
+        private authService: AuthenticationService,
+    ) { }
 
     ngOnInit() {
       if (this.authService.user) {

@@ -3,18 +3,17 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { AuthenticationService } from '../_services/authentication.service';
 import { AlertService } from '../alerts/alert.service';
-import { BookService } from '../_services/book.service';
-import { Book } from '../_models/book';
-
+import { UserService } from '../_services/user.service';
+import { User } from '../_models/user';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
-  selector: 'book-detail',
-  templateUrl: './book-detail.component.html',
+  selector: 'user-detail',
+  templateUrl: './user-detail.component.html',
 })
-export class BookDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit {
 
-    @Input() book: Book;
+    @Input() user: User;
 
     title: string;
 
@@ -23,13 +22,13 @@ export class BookDetailComponent implements OnInit {
       private location: Location,
       private authService: AuthenticationService,
       private alertService: AlertService,
-      private bookService: BookService,
+      private userService: UserService,
     ) {}
 
     ngOnInit() {
-        this.route.data.subscribe((data: { book: Book }) => {
-            this.title = data.book.name;
-            this.book = data.book;
+        this.route.data.subscribe((data: { user: User }) => {
+            this.title = data.user.nickname;
+            this.user = data.user;
         });
     }
 
@@ -38,7 +37,7 @@ export class BookDetailComponent implements OnInit {
     }
 
     save(): void {
-      this.bookService.update(this.book, this.authService.token)
+      this.userService.update(this.user, this.authService.token)
         .then(() => this.goBack())
         .catch(
             error => {

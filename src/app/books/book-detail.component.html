@@ -4,9 +4,9 @@
     <h2>{{title}} details!</h2>
   </div>
   <div class="panel-body">
-      <div><label>id: </label>{{book.id}}</div>
+      <div><label>Id: </label>{{book.id}}</div>
       <div><label>ISBN: </label>{{book.id}}</div>
-      <div><label>name: </label><input placeholder="name" class="form-control" [(ngModel)]="book.name" #bookname="ngModel" required/></div>
+      <div><label>Name: </label><input placeholder="name" class="form-control" [(ngModel)]="book.name" #bookname="ngModel" required/></div>
       <button (click)="goBack()">Back</button>
       <button [disabled]="bookname.pristine || bookname.value == ''" (click)="save()">Save</button>
   </div>

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Http, Response } from '@angular/http';
 import { BaseService } from './base.service';
-import { User } from '../_models/user';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
 

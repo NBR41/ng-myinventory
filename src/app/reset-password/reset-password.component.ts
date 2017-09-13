@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PasswordService } from '../_services/password.service';
 import { AlertService } from '../alerts/alert.service';
 import { DialogService } from '../dialog/dialog.service';
+import { PasswordService } from '../_services/password.service';
 
 @Component({
     moduleId: module.id,

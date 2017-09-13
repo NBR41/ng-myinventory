@@ -1,0 +1,15 @@
+<alert></alert>
+<div *ngIf="user" class="panel panel-default">
+  <div class="panel-heading">
+    <h2>{{title}} details!</h2>
+  </div>
+  <div class="panel-body">
+      <div><label>Id: </label>{{user.id}}</div>
+      <div><label>Email: </label>{{user.email}}</div>
+      <div><label>Nickname: </label><input placeholder="Nickname" class="form-control" [(ngModel)]="user.nickname" #nickname="ngModel" required/></div>
+      <div><label>Admin: </label>{{user.is_admin}}</div>
+      <div><label>Validated: </label>{{user.is_validated}}</div>
+      <button (click)="goBack()">Back</button>
+      <button [disabled]="nickname.pristine || nickname.value == ''" (click)="save()">Save</button>
+  </div>
+</div>
